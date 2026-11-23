@@ -93,6 +93,8 @@
               kolektor. Temukan berbagai model mobil, motor, dan kendaraan
               lainnya dengan detail yang menakjubkan.
             </h4>
+            <span id="tanggal"></span>
+            <span id="jam"></span>
           </div>
         </div>
       </div>
@@ -495,6 +497,13 @@
     </section>
     <!-- Tabel Data Diri -->
     <!-- profile -->
+    <!-- Tombol Back to Top -->
+    <button
+      id="backToTop"
+      class="btn btn-danger rounded-circle position-fixed bottom-0 end-0 m-3 d-none"
+    >
+      <i class="bi bi-arrow-up" title="Back to Top"></i>
+    </button>
 
     <!-- footer -->
     <footer class="text-center p-5">
@@ -514,5 +523,54 @@
       integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
       crossorigin="anonymous"
     ></script>
+    <script type="text/javascript">
+      function tampilWaktu() {
+        const waktu = new Date();
+
+        const tanggal = waktu.getDate();
+        const bulan = waktu.getMonth();
+        const tahun = waktu.getFullYear();
+        const jam = waktu.getHours();
+        const menit = waktu.getMinutes();
+        const detik = waktu.getSeconds();
+
+        const arrBulan = [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12",
+        ];
+
+        const tanggal_full = tanggal + "/" + arrBulan[bulan] + "/" + tahun;
+        const jam_full = jam + ":" + menit + ":" + detik;
+
+        document.getElementById("tanggal").innerHTML = tanggal_full;
+        document.getElementById("jam").innerHTML = jam_full;
+      }
+      setInterval(tampilWaktu, 1000);
+    </script>
+    <script type="text/javascript">
+      const backToTop = document.getElementById("backToTop");
+
+      window.addEventListener("scroll", function () {
+        if (window.scrollY > 300) {
+          backToTop.classList.remove("d-none");
+        } else {
+          backToTop.classList.add("d-none");
+        }
+      });
+
+      backToTop.addEventListener("click", function () {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    </script>
   </body>
 </html>
