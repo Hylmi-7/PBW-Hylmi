@@ -69,6 +69,14 @@
                 >Profile</a
               >
             </li>
+            <li class="nav-item mb-2 mb-lg-0 ms-lg-2">
+              <button id="darkBtn" class="btn btn-dark" title="Dark Mode">
+                <i class="bi bi-moon-stars-fill"></i>
+              </button>
+              <button id="lightBtn" class="btn btn-danger" title="Light Mode">
+                <i class="bi bi-brightness-high-fill"></i>
+              </button>
+            </li>
           </ul>
         </div>
       </div>
@@ -570,6 +578,78 @@
 
       backToTop.addEventListener("click", function () {
         window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    </script>
+    <script type="text/javascript">
+      const darkBtn = document.getElementById("darkBtn");
+      const lightBtn = document.getElementById("lightBtn");
+
+      // Tombol DARK MODE (background gelap, teks terang)
+      darkBtn.addEventListener("click", function () {
+        document.documentElement.setAttribute("data-bs-theme", "dark");
+        document.body.classList.add("bg-dark", "text-white");
+
+        // Ubah Navbar
+        const navbar = document.querySelector("nav");
+        navbar.classList.remove("bg-secondary-subtle");
+        navbar.classList.add("bg-dark", "navbar-dark");
+
+        // Ubah semua Section yang memakai bg-secondary-subtle
+        document
+          .querySelectorAll("section.bg-secondary-subtle")
+          .forEach((sec) => {
+            sec.classList.remove("bg-secondary-subtle");
+            sec.classList.add("bg-black", "text-white", "dark-section");
+          });
+
+        // Ubah Card & kotak putih di Profile
+        document.querySelectorAll(".card").forEach((card) => {
+          card.classList.add("bg-dark", "text-white");
+        });
+        const profileBox = document.querySelector("#Profile .bg-white");
+        if (profileBox) {
+          profileBox.classList.remove("bg-white");
+          profileBox.classList.add("bg-dark", "text-white");
+        }
+
+        // Ubah teks & ikon yang memakai text-dark menjadi text-white
+        document.querySelectorAll(".text-dark").forEach((el) => {
+          el.classList.remove("text-dark");
+          el.classList.add("text-white", "dark-text-swap");
+        });
+      });
+
+      // Tombol LIGHT MODE (background terang, teks gelap - default)
+      lightBtn.addEventListener("click", function () {
+        document.documentElement.setAttribute("data-bs-theme", "light");
+        document.body.classList.remove("bg-dark", "text-white");
+
+        // Kembalikan Navbar
+        const navbar = document.querySelector("nav");
+        navbar.classList.remove("bg-dark", "navbar-dark");
+        navbar.classList.add("bg-secondary-subtle");
+
+        // Kembalikan semua Section ke bg-secondary-subtle
+        document.querySelectorAll(".dark-section").forEach((sec) => {
+          sec.classList.remove("bg-black", "text-white", "dark-section");
+          sec.classList.add("bg-secondary-subtle");
+        });
+
+        // Kembalikan Card & kotak Profile ke putih
+        document.querySelectorAll(".card").forEach((card) => {
+          card.classList.remove("bg-dark", "text-white");
+        });
+        const profileBox = document.querySelector("#Profile .bg-dark");
+        if (profileBox) {
+          profileBox.classList.remove("bg-dark", "text-white");
+          profileBox.classList.add("bg-white");
+        }
+
+        // Kembalikan teks & ikon ke text-dark
+        document.querySelectorAll(".dark-text-swap").forEach((el) => {
+          el.classList.remove("text-white", "dark-text-swap");
+          el.classList.add("text-dark");
+        });
       });
     </script>
   </body>
